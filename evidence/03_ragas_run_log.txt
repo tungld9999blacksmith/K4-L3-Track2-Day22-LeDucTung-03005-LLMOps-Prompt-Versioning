@@ -1,0 +1,175 @@
+============================================================
+  Bước 3: RAGAS Evaluation
+============================================================
+✅ Config OK  |  Provider: GEMINI  |  Embeddings: GEMINI  |  Project: day22-lab
+🔨 Đang tạo FAISS index từ 107 chunks ...
+✅ FAISS vectorstore đã sẵn sàng.
+
+🚀 Đang chạy 50 câu hỏi với prompt v1 ...
+  [01/50] What are the three main types of machine learning?
+  [02/50] What is overfitting in machine learning?
+  [03/50] Explain the bias-variance tradeoff.
+  [04/50] How does regularization prevent overfitting?
+  [05/50] What is cross-validation?
+  [06/50] What is backpropagation?
+  [07/50] What are Convolutional Neural Networks primarily used for?
+  [08/50] How do LSTM networks address the vanishing gradient problem?
+  [09/50] What activation functions are commonly used in neural networ
+  [10/50] What is the role of pooling layers in CNNs?
+  [11/50] What is the transformer architecture?
+  [12/50] What are word embeddings?
+  [13/50] What is transfer learning in NLP?
+  [14/50] How does BERT handle language understanding?
+  [15/50] What is self-attention in transformers?
+  [16/50] What is GPT and how is it trained?
+  [17/50] What is instruction tuning?
+  [18/50] What is RLHF?
+  [19/50] What is chain-of-thought prompting?
+  [20/50] What is the context length of GPT-4?
+  [21/50] What is Retrieval-Augmented Generation?
+  [22/50] What are the main components of a RAG pipeline?
+  [23/50] What is dense retrieval?
+  [24/50] Why is chunking strategy important in RAG?
+  [25/50] What advanced RAG techniques exist beyond basic retrieval?
+  [26/50] What are vector databases used for?
+  [27/50] What is FAISS?
+  [28/50] How do text embeddings capture semantic meaning?
+  [29/50] What is HNSW?
+  [30/50] What is hybrid search in vector databases?
+  [31/50] What is LangChain?
+  [32/50] What is LangChain Expression Language (LCEL)?
+  [33/50] What is LangGraph?
+  [34/50] What memory types does LangChain support?
+  [35/50] What are LangChain retrievers?
+  [36/50] What is LangSmith?
+  [37/50] What information do LangSmith traces capture?
+  [38/50] What is the LangSmith Prompt Hub?
+  [39/50] How does LangSmith help monitor production LLM applications?
+  [40/50] What are LangSmith datasets used for?
+  [41/50] What is RAGAS?
+  [42/50] How does RAGAS compute faithfulness?
+  [43/50] What is answer relevancy in RAGAS?
+  [44/50] What is context recall in RAGAS?
+  [45/50] What inputs does RAGAS evaluation require?
+  [46/50] What is Guardrails AI?
+  [47/50] What is PII and why is it important to detect in LLM respons
+  [48/50] What does structured output validation ensure?
+  [49/50] What is Constitutional AI?
+  [50/50] What are common AI safety concerns with LLMs?
+
+🚀 Đang chạy 50 câu hỏi với prompt v2 ...
+  [01/50] What are the three main types of machine learning?
+  [02/50] What is overfitting in machine learning?
+  [03/50] Explain the bias-variance tradeoff.
+  [04/50] How does regularization prevent overfitting?
+  [05/50] What is cross-validation?
+  [06/50] What is backpropagation?
+  [07/50] What are Convolutional Neural Networks primarily used for?
+  [08/50] How do LSTM networks address the vanishing gradient problem?
+  [09/50] What activation functions are commonly used in neural networ
+  [10/50] What is the role of pooling layers in CNNs?
+  [11/50] What is the transformer architecture?
+  [12/50] What are word embeddings?
+  [13/50] What is transfer learning in NLP?
+  [14/50] How does BERT handle language understanding?
+  [15/50] What is self-attention in transformers?
+  [16/50] What is GPT and how is it trained?
+  [17/50] What is instruction tuning?
+  [18/50] What is RLHF?
+  [19/50] What is chain-of-thought prompting?
+  [20/50] What is the context length of GPT-4?
+  [21/50] What is Retrieval-Augmented Generation?
+  [22/50] What are the main components of a RAG pipeline?
+  [23/50] What is dense retrieval?
+  [24/50] Why is chunking strategy important in RAG?
+  [25/50] What advanced RAG techniques exist beyond basic retrieval?
+  [26/50] What are vector databases used for?
+  [27/50] What is FAISS?
+  [28/50] How do text embeddings capture semantic meaning?
+  [29/50] What is HNSW?
+  [30/50] What is hybrid search in vector databases?
+  [31/50] What is LangChain?
+  [32/50] What is LangChain Expression Language (LCEL)?
+  [33/50] What is LangGraph?
+  [34/50] What memory types does LangChain support?
+  [35/50] What are LangChain retrievers?
+  [36/50] What is LangSmith?
+  [37/50] What information do LangSmith traces capture?
+  [38/50] What is the LangSmith Prompt Hub?
+  [39/50] How does LangSmith help monitor production LLM applications?
+  [40/50] What are LangSmith datasets used for?
+  [41/50] What is RAGAS?
+  [42/50] How does RAGAS compute faithfulness?
+  [43/50] What is answer relevancy in RAGAS?
+  [44/50] What is context recall in RAGAS?
+  [45/50] What inputs does RAGAS evaluation require?
+  [46/50] What is Guardrails AI?
+  [47/50] What is PII and why is it important to detect in LLM respons
+  [48/50] What does structured output validation ensure?
+  [49/50] What is Constitutional AI?
+  [50/50] What are common AI safety concerns with LLMs?
+
+📐 Đang đánh giá RAGAS cho prompt v1 ... (vui lòng chờ ~5-10 phút)
+Evaluating:   0%|          | 0/200 [00:00<?, ?it/s]Evaluating:   0%|          | 1/200 [00:03<13:04,  3.94s/it]LLM returned 1 generations instead of requested 3. Proceeding with 1 generations.
+Evaluating:   1%|          | 2/200 [00:13<23:16,  7.05s/it]LLM returned 1 generations instead of requested 3. Proceeding with 1 generations.
+Evaluating:   2%|▏         | 3/200 [00:23<28:14,  8.60s/it]Evaluating:   2%|▎         | 5/200 [00:32<20:39,  6.36s/it]Evaluating:   3%|▎         | 6/200 [00:39<20:52,  6.46s/it]Evaluating:   4%|▎         | 7/200 [00:48<22:49,  7.10s/it]Evaluating:   4%|▍         | 8/200 [00:50<18:03,  5.64s/it]LLM returned 1 generations instead of requested 3. Proceeding with 1 generations.
+Evaluating:   4%|▍         | 9/200 [00:57<19:19,  6.07s/it]Evaluating:   5%|▌         | 10/200 [01:04<20:08,  6.36s/it]LLM returned 1 generations instead of requested 3. Proceeding with 1 generations.
+Evaluating:   6%|▌         | 12/200 [01:13<17:04,  5.45s/it]Evaluating:   7%|▋         | 14/200 [01:23<16:29,  5.32s/it]Evaluating:   8%|▊         | 15/200 [01:42<25:44,  8.35s/it]Evaluating:   8%|▊         | 16/200 [01:46<22:05,  7.20s/it]Evaluating:   8%|▊         | 17/200 [01:50<19:47,  6.49s/it]LLM returned 1 generations instead of requested 3. Proceeding with 1 generations.
+Evaluating:  10%|▉         | 19/200 [02:05<21:00,  6.97s/it]LLM returned 1 generations instead of requested 3. Proceeding with 1 generations.
+Evaluating:  10%|█         | 20/200 [02:13<21:20,  7.11s/it]Evaluating:  11%|█         | 22/200 [02:28<21:34,  7.27s/it]Evaluating:  12%|█▏        | 23/200 [02:45<27:52,  9.45s/it]Evaluating:  12%|█▏        | 24/200 [02:51<25:17,  8.62s/it]Evaluating:  12%|█▎        | 25/200 [02:57<22:55,  7.86s/it]Evaluating:  13%|█▎        | 26/200 [03:06<23:55,  8.25s/it]Evaluating:  14%|█▎        | 27/200 [03:09<19:47,  6.86s/it]Evaluating:  14%|█▍        | 28/200 [03:49<46:46, 16.32s/it]Evaluating:  14%|█▍        | 29/200 [03:52<35:03, 12.30s/it]LLM returned 1 generations instead of requested 3. Proceeding with 1 generations.
+Evaluating:  15%|█▌        | 30/200 [04:08<37:42, 13.31s/it]Evaluating:  16%|█▌        | 31/200 [04:10<28:10, 10.00s/it]Evaluating:  16%|█▌        | 32/200 [04:20<28:34, 10.20s/it]LLM returned 1 generations instead of requested 3. Proceeding with 1 generations.
+Evaluating:  16%|█▋        | 33/200 [04:26<24:17,  8.73s/it]Evaluating:  17%|█▋        | 34/200 [04:47<34:20, 12.42s/it]Evaluating:  18%|█▊        | 35/200 [04:52<28:09, 10.24s/it]Evaluating:  18%|█▊        | 36/200 [04:56<23:14,  8.51s/it]Evaluating:  18%|█▊        | 37/200 [05:02<20:41,  7.62s/it]Exception raised in Job[25]: TimeoutError()
+Evaluating:  19%|█▉        | 38/200 [05:28<35:32, 13.16s/it]Evaluating:  20%|█▉        | 39/200 [05:46<39:34, 14.75s/it]Evaluating:  20%|██        | 40/200 [05:51<30:58, 11.62s/it]Evaluating:  20%|██        | 41/200 [05:57<26:48, 10.11s/it]LLM returned 1 generations instead of requested 3. Proceeding with 1 generations.
+Evaluating:  21%|██        | 42/200 [06:08<27:05, 10.29s/it]Evaluating:  22%|██▏       | 43/200 [06:12<21:53,  8.37s/it]Evaluating:  22%|██▏       | 44/200 [06:48<43:18, 16.65s/it]Evaluating:  22%|██▎       | 45/200 [06:52<33:29, 12.97s/it]Evaluating:  23%|██▎       | 46/200 [07:05<32:55, 12.83s/it]LLM returned 1 generations instead of requested 3. Proceeding with 1 generations.
+Evaluating:  24%|██▎       | 47/200 [07:12<28:30, 11.18s/it]LLM returned 1 generations instead of requested 3. Proceeding with 1 generations.
+Evaluating:  24%|██▍       | 48/200 [07:21<26:21, 10.40s/it]Evaluating:  24%|██▍       | 49/200 [07:25<21:44,  8.64s/it]Exception raised in Job[37]: GoogleInvalidRequestError(Error calling model 'gemini-3.5-flash-lite' (INVALID_ARGUMENT): 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'Multiple candidates is not enabled for this model', 'status': 'INVALID_ARGUMENT'}})
+Evaluating:  26%|██▌       | 51/200 [07:38<18:58,  7.64s/it]Evaluating:  26%|██▌       | 52/200 [07:50<21:39,  8.78s/it]Evaluating:  27%|██▋       | 54/200 [08:02<18:26,  7.58s/it]Evaluating:  28%|██▊       | 55/200 [08:07<17:04,  7.07s/it]Evaluating:  28%|██▊       | 56/200 [08:16<17:46,  7.41s/it]LLM returned 1 generations instead of requested 3. Proceeding with 1 generations.
+Exception raised in Job[57]: OutputParserException(Invalid json output: {
+    "question": "C\u01a1 ch\u1ebf self-attention trong transformers ho\u1ea1t \u0111\u1ed9ng nh\u01b° th\u1ebf n\u00e0o?",
+    "noncommittal": 0
+}
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE )
+Evaluating:  28%|██▊       | 57/200 [08:47<32:04, 13.46s/it]Evaluating:  29%|██▉       | 58/200 [08:49<24:36, 10.40s/it]LLM returned 1 generations instead of requested 3. Proceeding with 1 generations.
+Evaluating:  30%|██▉       | 59/200 [09:05<28:23, 12.08s/it]Evaluating:  30%|███       | 60/200 [09:10<23:11,  9.94s/it]Evaluating:  30%|███       | 61/200 [09:13<18:31,  7.99s/it]Evaluating:  31%|███       | 62/200 [09:19<17:02,  7.41s/it]Evaluating:  32%|███▏      | 63/200 [09:45<29:21, 12.86s/it]Evaluating:  32%|███▏      | 64/200 [09:50<23:42, 10.46s/it]Evaluating:  32%|███▎      | 65/200 [09:52<18:23,  8.17s/it]LLM returned 1 generations instead of requested 3. Proceeding with 1 generations.
+Evaluating:  33%|███▎      | 66/200 [10:07<22:32, 10.09s/it]LLM returned 1 generations instead of requested 3. Proceeding with 1 generations.
+Evaluating:  34%|███▎      | 67/200 [10:18<23:09, 10.45s/it]Evaluating:  34%|███▍      | 68/200 [10:22<18:26,  8.38s/it]Exception raised in Job[68]: OutputParserException(Invalid json output: {
+    "statements": [
+        {
+            "statement": "Reinforcement Learning from Human Feedback (RLHF) l\u00e0 k\u1ef5 thu\u1eadt c\u0103n ch\u1ec9nh c\u00e1c m\u00focirc h\u00ecnh ng\u00f4n ng\u1eef l\u1edbn (LLM) ph\u00f9 h\u1ee3p v\u1edbi gi\u00e1 tr\u1ecb con ng\u01b0\u1eddi.",
+            "reason": "Context states: Reinforcement Learning from Human Feedback (RLHF) is a technique for aligning large language models with human values, which matches the statement.",
+            "verdict": 1
+        },
+        {
+            "statement": "K\u1ef5 thu\u1eadt RLHF gi\u00fap c\u00e1c m\u00focirc h\u00ecnh ng\u00f4n ng\u1eef l\u1edbn tr\u1edf n\u00ean h\u1eefu \u00edch, v\u00f4 h\u1ea1i v\u00e0 trung th\u1ef1c.",
+            "reason": "Context states: RLHF uses human preferences to align LLMs to be helpful, harmless, and honest.",
+            "verdict": 1
+        },
+        {
+            "statement": "Qu\u00e1 tr\u00ecnh RLHF g\u1ed3m ba b\u01b0\u1edbc ch\u00ednh.",
+            "reason": "Context states: The process involves three steps.",
+            "verdict": 1
+        },
+        {
+            "statement": "B\u01b0\u1edbc th\u1ee9 nh\u1ea5t l\u00e0 tinh ch\u1ec9nh m\u00focirc h\u00ecnh ng\u00f4n ng\u1eef l\u1edbn b\u1eb1ng h\u1ecdc gi\u00e1m s\u00e1t v\u1edbi d\u1eef li\u1ec7u m\u1eabu.",
+            "reason": "Context states: first, fine-tuning the LLM with supervised learning on demonstrations.",
+            "verdict": 1
+        },
+        {
+            "statement": "B\u01b0\u1edbc th\u1ee9 hai l\u00e0 hu\u1ea5n luy\u1ec7n m\u00focirc h\u00ecnh ph\u1ea7n th\u01b0\u1edfng d\u1ef1a tr\u00ean s\u1edf th\u00edch c\u1ee7a con ng\u01b0\u1eddi.",
+            "reason": "Context states: second, training a reward model on human preference comparisons between model outputs.",
+            "verdict": 1
+        },
+        {
+            "statement": "B\u01b0\u1edbc th\u1ee9 ba l\u00e0 t\u1ed1i \u01b0u h\u00f3a m\u00focirc h\u00ecnh ng\u00f4n ng\u1eef d\u1ef1a tr\u00ean m\u00focirc h\u00ecnh ph\u1ea7n th\u01b0\u1edfng \u0111\u00f3 b\u1eb1ng h\u1ecdc t\u0103ng c\u01b0\u1eddng, th\u01b0\u1eddng l\u00e0 thu\u1eadt t\u00f3an PPO.",
+            "reason": "Context states: third, optimizing the language model against the reward model using reinforcement learning (typically PPO).",
+            "verdict": 1
+        }
+    ]
+}
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE )
+Evaluating:  34%|███▍      | 69/200 [10:25<15:05,  6.92s/it]Exception raised in Job[53]: TimeoutError()
+Evaluating:  36%|███▌      | 71/200 [10:47<18:31,  8.61s/it]Evaluating:  36%|███▌      | 72/200 [10:50<15:25,  7.23s/it]LLM returned 1 generations instead of requested 3. Proceeding with 1 generations.
+Evaluating:  36%|███▋      | 73/200 [10:56<14:45,  6.97s/it]Evaluating:  37%|███▋      | 74/200 [11:03<14:50,  7.07s/it]Evaluating:  38%|███▊      | 75/200 [11:12<15:58,  7.67s/it]Evaluating:  38%|███▊      | 76/200 [11:18<14:40,  7.10s/it]Evaluating:  38%|███▊      | 77/200 [12:27<51:01, 24.89s/it]Exception raised in Job[75]: TimeoutError()
+Evaluating:  39%|███▉      | 78/200 [13:50<1:25:13, 41.91s/it]Exception raised in Job[76]: TimeoutError()
+Evaluating:  40%|███▉      | 79/200 [13:56<1:03:19, 31.40s/it]Exception raised in Job[77]: TimeoutError()
+Evaluating:  40%|████      | 80/200 [14:03<48:31, 24.26s/it]  
