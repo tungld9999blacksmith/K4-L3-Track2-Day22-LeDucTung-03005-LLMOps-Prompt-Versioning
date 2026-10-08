@@ -36,6 +36,11 @@ from utils.data_loader import load_knowledge_base, split_text, build_vectorstore
 from qa_pairs import QA_PAIRS
 from ragas import RunConfig
 
+# Số cặp QA đánh giá. Gemini free tier chạy RAGAS cho đủ 50 cặp × 2 version mất > 2 giờ
+# (bị TimeoutError, ~25-40s/job) → giới hạn 20 cặp đầu để kịp deadline.
+NUM_EVAL_QA   = 20
+EVAL_QA_PAIRS = QA_PAIRS[:NUM_EVAL_QA]
+
 
 # ── 1. Prompt Templates (copy từ Bước 2) ──────────────────────────────────
 # TODO: Copy SYSTEM_V1 và SYSTEM_V2 mà bạn đã viết ở file 02_prompt_hub_ab_routing.py
@@ -121,9 +126,9 @@ def collect_rag_outputs(vectorstore, prompt_version: str) -> list:
     prompt    = PROMPTS[prompt_version]
 
     results = []
-    print(f"\n🚀 Đang chạy 50 câu hỏi với prompt {prompt_version} ...")
+    print(f"\n🚀 Đang chạy {len(EVAL_QA_PAIRS)} câu hỏi với prompt {prompt_version} ...")
 
-    for i, qa in enumerate(QA_PAIRS, 1):
+    for i, qa in enumerate(EVAL_QA_PAIRS, 1):
         # TODO: Gọi run_rag() cho câu hỏi hiện tại
         out = run_rag(retriever, llm, prompt, qa["question"])
 
@@ -134,7 +139,7 @@ def collect_rag_outputs(vectorstore, prompt_version: str) -> list:
             "answer":    out["answer"],        # out["answer"]
             "contexts":  out["contexts"],        # out["contexts"] — phải là list[str] !
         })
-        print(f"  [{i:02d}/50] {qa['question'][:60]}")
+        print(f"  [{i:02d}/{len(EVAL_QA_PAIRS)}] {qa['question'][:60]}")
 
     return results
 
@@ -254,6 +259,7 @@ def main():
         "prompt_v1_scores": v1_scores,
         "prompt_v2_scores": v2_scores,
         "target_met": best_faith >= 0.8,
+        "num_qa_pairs": len(EVAL_QA_PAIRS),
     }
     report_path = Path(__file__).parent.parent / "data" / "ragas_report.json"
     # TODO: Ghi report vào file bằng json.dumps hoặc json.dump
