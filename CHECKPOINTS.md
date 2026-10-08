@@ -24,8 +24,18 @@ pip install "langchain-community<0.4"   # bắt buộc: bản 0.4 làm import ra
 
 **2. Tạo tài khoản LangSmith và lấy API key**
 
-1. Đăng ký miễn phí tại [smith.langchain.com](https://smith.langchain.com).
-2. Vào **Settings** → **API Keys** → **Create API Key**, sao chép key (bắt đầu bằng `lsv2_`).
+1. Mở [smith.langchain.com](https://smith.langchain.com) → **Sign up** (đăng nhập bằng Google/GitHub hoặc email). Gói **Developer** miễn phí là đủ cho lab. Xác nhận email nếu được yêu cầu, rồi tạo/chấp nhận workspace mặc định.
+2. Ở thanh bên trái, bấm biểu tượng bánh răng **Settings** (góc dưới bên trái) → chọn tab **API Keys**.
+3. Bấm **Create API Key** và điền:
+   - **Description**: tên tùy ý, ví dụ `day22-lab`.
+   - **Key Type**: chọn **Personal Access Token** (khóa dạng `lsv2_pt_...`). Không cần Service Key (`lsv2_sk_...`).
+   - **Expiration**: để `Never` hoặc chọn thời hạn dài hơn thời gian làm lab.
+4. Bấm **Create**, rồi **sao chép key ngay** — key chỉ hiện **một lần**, đóng hộp thoại là không xem lại được (mất thì phải tạo key mới).
+5. Dán key vào dòng `LANGCHAIN_API_KEY=` trong `.env` ở bước 3 bên dưới. Không dán key vào code, chat, log hay ảnh chụp màn hình (xem [RULES.md](RULES.md)).
+
+> Không cần tạo project thủ công: LangSmith tự tạo project tên `day22-lab` (giá trị `LANGCHAIN_PROJECT`) ở lần chạy đầu tiên có trace.
+>
+> Nếu tài khoản của bạn nằm ở khu vực EU (đăng nhập qua `eu.smith.langchain.com`), thêm dòng `LANGCHAIN_ENDPOINT=https://eu.api.smith.langchain.com` vào `.env`; mặc định (US) thì không cần.
 
 **3. Cấu hình `.env`**
 
