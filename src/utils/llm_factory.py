@@ -1,5 +1,5 @@
 """
-Factory tạo LLM và Embeddings cho 6 providers: openai, gemini, anthropic, ollama, openrouter, huggingface.
+Factory tạo LLM và Embeddings cho 7 providers: openai, gemini, anthropic, ollama, openrouter, huggingface, qwen.
 
 Cách dùng:
     from utils.llm_factory import get_llm, get_embeddings
@@ -80,6 +80,16 @@ def get_llm(provider: str = None, temperature: float = 0.0):
             temperature=temperature,
         )
 
+    elif provider == "qwen":
+        # Alibaba Cloud Model Studio (DashScope) — OpenAI-compatible API
+        from langchain_openai import ChatOpenAI
+        return ChatOpenAI(
+            model=config.QWEN_MODEL,
+            api_key=config.QWEN_API_KEY,
+            base_url=config.QWEN_BASE_URL,
+            temperature=temperature,
+        )
+
     elif provider == "huggingface":
         # HF Inference Providers router là OpenAI-compatible API
         from langchain_openai import ChatOpenAI
@@ -93,7 +103,7 @@ def get_llm(provider: str = None, temperature: float = 0.0):
     else:
         raise ValueError(
             f"Provider không hợp lệ: '{provider}'. "
-            "Chọn một trong: openai, gemini, anthropic, ollama, openrouter, huggingface"
+            "Chọn một trong: openai, gemini, anthropic, ollama, openrouter, huggingface, qwen"
         )
 
 
@@ -108,7 +118,7 @@ def get_embeddings(provider: str = None):
           Cài đặt: ollama pull nomic-embed-text
 
     Args:
-        provider: "openai" | "gemini" | "anthropic" | "ollama" | "openrouter" | "huggingface"
+        provider: "openai" | "gemini" | "anthropic" | "ollama" | "openrouter" | "huggingface" | "qwen"
                   Mặc định: đọc EMBEDDING_PROVIDER từ .env (trống → PROVIDER)
 
     Returns:
@@ -153,6 +163,18 @@ def _build_embeddings(provider: str):
             base_url=config.OLLAMA_BASE_URL,
         )
 
+    elif provider == "qwen":
+        from langchain_openai import OpenAIEmbeddings
+        return OpenAIEmbeddings(
+            model=config.QWEN_EMBEDDING_MODEL,
+            api_key=config.QWEN_API_KEY,
+            base_url=config.QWEN_BASE_URL,
+            # text-embedding-v4 nhận tối đa 10 dòng / request
+            chunk_size=10,
+            # Gửi văn bản thô; mặc định OpenAIEmbeddings gửi token ids (tiktoken) — chỉ OpenAI hiểu
+            check_embedding_ctx_length=False,
+        )
+
     elif provider == "huggingface":
         return HFInferenceEmbeddings(
             model=config.HF_EMBEDDING_MODEL,
@@ -163,7 +185,7 @@ def _build_embeddings(provider: str):
     else:
         raise ValueError(
             f"Provider không hợp lệ: '{provider}'. "
-            "Chọn một trong: openai, gemini, anthropic, ollama, openrouter, huggingface"
+            "Chọn một trong: openai, gemini, anthropic, ollama, openrouter, huggingface, qwen"
         )
 
 
@@ -174,6 +196,8 @@ def is_retryable_error(error: Exception) -> bool:
     """
     msg = f"{type(error).__name__}: {error}".lower()
     if any(code in msg for code in ("401", "402", "403", "404")):
+        return False
+    if "perday" in msg:   # hết quota theo NGÀY → chờ vài phút cũng vô ích
         return False
     markers = ("timeout", "timed out", "deadline_exceeded", "connect", "remoteprotocol",
                "429", "resource_exhausted", "rate limit", "500", "502", "503", "504",

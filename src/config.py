@@ -19,7 +19,7 @@ os.environ["LANGCHAIN_PROJECT"]    = os.getenv("LANGCHAIN_PROJECT", "day22-lab")
 os.environ["LANGCHAIN_ENDPOINT"]   = os.getenv("LANGCHAIN_ENDPOINT", "https://api.smith.langchain.com")
 
 # ── Provider mặc định ─────────────────────────────────────────────────────
-# Đổi giá trị PROVIDER trong .env: openai | gemini | anthropic | ollama | openrouter | huggingface
+# Đổi giá trị PROVIDER trong .env: openai | gemini | anthropic | ollama | openrouter | huggingface | qwen
 PROVIDER = os.getenv("PROVIDER", "openai").lower()
 # Provider riêng cho embeddings (vd. LLM Gemini + embeddings Hugging Face).
 # Để trống → dùng chung PROVIDER.
@@ -57,6 +57,13 @@ HF_EMBEDDING_MODEL    = os.getenv("HF_EMBEDDING_MODEL", "intfloat/multilingual-e
 HF_EMBEDDING_PROVIDER = os.getenv("HF_EMBEDDING_PROVIDER", "hf-inference")
 HF_BASE_URL           = "https://router.huggingface.co/v1"   # OpenAI-compatible router
 
+# ── Qwen (Alibaba Cloud Model Studio / DashScope) ────────────────────────
+# OpenAI-compatible API. Mặc định region Singapore (international).
+QWEN_API_KEY         = os.getenv("QWEN_API_KEY") or os.getenv("DASHSCOPE_API_KEY", "")
+QWEN_BASE_URL        = os.getenv("QWEN_BASE_URL", "https://dashscope-intl.aliyuncs.com/compatible-mode/v1")
+QWEN_MODEL           = os.getenv("QWEN_MODEL", "qwen-flash")
+QWEN_EMBEDDING_MODEL = os.getenv("QWEN_EMBEDDING_MODEL", "text-embedding-v4")
+
 # ── LangSmith ─────────────────────────────────────────────────────────────
 LANGSMITH_API_KEY = os.getenv("LANGCHAIN_API_KEY", "")
 LANGSMITH_PROJECT = os.getenv("LANGCHAIN_PROJECT", "day22-lab")
@@ -80,10 +87,14 @@ def validate() -> bool:
         missing.append("ANTHROPIC_API_KEY")
     elif PROVIDER == "openrouter" and not OPENROUTER_API_KEY:
         missing.append("OPENROUTER_API_KEY")
+    elif PROVIDER == "qwen" and not QWEN_API_KEY:
+        missing.append("QWEN_API_KEY")
     elif PROVIDER == "huggingface" and not HF_TOKEN:
         missing.append("HF_TOKEN")
     # Ollama: không cần API key
 
+    if EMBEDDING_PROVIDER == "qwen" and not QWEN_API_KEY and "QWEN_API_KEY" not in missing:
+        missing.append("QWEN_API_KEY (EMBEDDING_PROVIDER=qwen)")
     if EMBEDDING_PROVIDER == "huggingface" and not HF_TOKEN and "HF_TOKEN" not in missing:
         missing.append("HF_TOKEN (EMBEDDING_PROVIDER=huggingface)")
 

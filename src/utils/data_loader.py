@@ -53,6 +53,8 @@ def split_text(text: str, chunk_size: int = 500, chunk_overlap: int = 50) -> lis
 def _is_rate_limit(error: Exception) -> bool:
     """Nhận diện lỗi vượt quota/rate limit (HTTP 429) của provider embeddings."""
     msg = str(error)
+    if "PerDay" in msg:   # hết quota theo ngày → không retry
+        return False
     return "429" in msg or "RESOURCE_EXHAUSTED" in msg or "rate limit" in msg.lower()
 
 

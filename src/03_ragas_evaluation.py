@@ -36,9 +36,14 @@ from utils.data_loader import load_knowledge_base, split_text, build_vectorstore
 from qa_pairs import QA_PAIRS
 from ragas import RunConfig
 
+# answer_relevancy mặc định xin LLM sinh 3 câu hỏi trong 1 lần gọi (n=3). Gemini không hỗ trợ
+# nhiều candidates → lỗi 400 "Multiple candidates is not enabled". Giảm còn 1 khi dùng Gemini.
+if config.PROVIDER == "gemini":
+    answer_relevancy.strictness = 1
+
 # Số cặp QA đánh giá. Gemini free tier chạy RAGAS cho đủ 50 cặp × 2 version mất > 2 giờ
 # (bị TimeoutError, ~25-40s/job) → giới hạn 20 cặp đầu để kịp deadline.
-NUM_EVAL_QA   = 20
+NUM_EVAL_QA   = 50
 EVAL_QA_PAIRS = QA_PAIRS[:NUM_EVAL_QA]
 
 
