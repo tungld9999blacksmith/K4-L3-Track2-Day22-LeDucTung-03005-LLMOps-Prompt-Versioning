@@ -19,8 +19,11 @@ os.environ["LANGCHAIN_PROJECT"]    = os.getenv("LANGCHAIN_PROJECT", "day22-lab")
 os.environ["LANGCHAIN_ENDPOINT"]   = os.getenv("LANGCHAIN_ENDPOINT", "https://api.smith.langchain.com")
 
 # ── Provider mặc định ─────────────────────────────────────────────────────
-# Đổi giá trị PROVIDER trong .env: openai | gemini | anthropic | ollama | openrouter
+# Đổi giá trị PROVIDER trong .env: openai | gemini | anthropic | ollama | openrouter | huggingface
 PROVIDER = os.getenv("PROVIDER", "openai").lower()
+# Provider riêng cho embeddings (vd. LLM Gemini + embeddings Hugging Face).
+# Để trống → dùng chung PROVIDER.
+EMBEDDING_PROVIDER = (os.getenv("EMBEDDING_PROVIDER") or PROVIDER).lower()
 
 # ── OpenAI ────────────────────────────────────────────────────────────────
 OPENAI_API_KEY         = os.getenv("OPENAI_API_KEY", "")
@@ -31,7 +34,7 @@ OPENAI_EMBEDDING_MODEL = os.getenv("OPENAI_EMBEDDING_MODEL", "text-embedding-3-s
 # ── Google Gemini ─────────────────────────────────────────────────────────
 GOOGLE_API_KEY          = os.getenv("GOOGLE_API_KEY", "")
 GEMINI_MODEL            = os.getenv("GEMINI_MODEL", "gemini-2.0-flash")
-GEMINI_EMBEDDING_MODEL  = os.getenv("GEMINI_EMBEDDING_MODEL", "models/embedding-001")
+GEMINI_EMBEDDING_MODEL  = os.getenv("GEMINI_EMBEDDING_MODEL", "models/gemini-embedding-001")
 
 # ── Anthropic ─────────────────────────────────────────────────────────────
 ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY", "")
@@ -46,6 +49,13 @@ OLLAMA_EMBEDDING_MODEL  = os.getenv("OLLAMA_EMBEDDING_MODEL", "nomic-embed-text"
 OPENROUTER_API_KEY  = os.getenv("OPENROUTER_API_KEY", "")
 OPENROUTER_MODEL    = os.getenv("OPENROUTER_MODEL", "openai/gpt-4o-mini")
 OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
+
+# ── Hugging Face Inference Providers ─────────────────────────────────────
+HF_TOKEN              = os.getenv("HF_TOKEN", "")
+HF_MODEL              = os.getenv("HF_MODEL", "Qwen/Qwen3-235B-A22B-Instruct-2507")
+HF_EMBEDDING_MODEL    = os.getenv("HF_EMBEDDING_MODEL", "intfloat/multilingual-e5-large")
+HF_EMBEDDING_PROVIDER = os.getenv("HF_EMBEDDING_PROVIDER", "hf-inference")
+HF_BASE_URL           = "https://router.huggingface.co/v1"   # OpenAI-compatible router
 
 # ── LangSmith ─────────────────────────────────────────────────────────────
 LANGSMITH_API_KEY = os.getenv("LANGCHAIN_API_KEY", "")
@@ -70,7 +80,12 @@ def validate() -> bool:
         missing.append("ANTHROPIC_API_KEY")
     elif PROVIDER == "openrouter" and not OPENROUTER_API_KEY:
         missing.append("OPENROUTER_API_KEY")
+    elif PROVIDER == "huggingface" and not HF_TOKEN:
+        missing.append("HF_TOKEN")
     # Ollama: không cần API key
+
+    if EMBEDDING_PROVIDER == "huggingface" and not HF_TOKEN and "HF_TOKEN" not in missing:
+        missing.append("HF_TOKEN (EMBEDDING_PROVIDER=huggingface)")
 
     if missing:
         print("⚠️  Thiếu biến môi trường:")
@@ -79,7 +94,7 @@ def validate() -> bool:
         print("   Hãy kiểm tra file .env của bạn (xem .env.example để biết thêm).")
         return False
 
-    print(f"✅ Config OK  |  Provider: {PROVIDER.upper()}  |  Project: {LANGSMITH_PROJECT}")
+    print(f"✅ Config OK  |  Provider: {PROVIDER.upper()}  |  Embeddings: {EMBEDDING_PROVIDER.upper()}  |  Project: {LANGSMITH_PROJECT}")
     return True
 
 

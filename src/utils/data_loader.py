@@ -50,20 +50,49 @@ def split_text(text: str, chunk_size: int = 500, chunk_overlap: int = 50) -> lis
     return splitter.split_text(text)
 
 
-def build_vectorstore(chunks: list, embeddings):
+def _is_rate_limit(error: Exception) -> bool:
+    """Nhận diện lỗi vượt quota/rate limit (HTTP 429) của provider embeddings."""
+    msg = str(error)
+    return "429" in msg or "RESOURCE_EXHAUSTED" in msg or "rate limit" in msg.lower()
+
+
+def build_vectorstore(chunks: list, embeddings, batch_size: int = 50,
+                      wait_seconds: int = 60, max_retries: int = 5):
     """
     Tạo FAISS vectorstore từ danh sách chunks và embeddings.
 
+    Embed theo từng lô `batch_size` chunks; nếu provider báo vượt rate limit
+    (vd. Gemini free tier: 100 request embed/phút) thì chờ `wait_seconds` rồi thử lại lô đó.
+
     Args:
-        chunks    : list[str] — danh sách text chunks đã chia
-        embeddings: Embeddings instance (từ get_embeddings())
+        chunks      : list[str] — danh sách text chunks đã chia
+        embeddings  : Embeddings instance (từ get_embeddings())
+        batch_size  : số chunks embed mỗi lô
+        wait_seconds: thời gian chờ khi bị rate limit
+        max_retries : số lần thử tối đa cho mỗi lô
 
     Returns:
         FAISS vectorstore đã được index và sẵn sàng dùng để retrieve
     """
+    import time
     from langchain_community.vectorstores import FAISS
 
     print(f"🔨 Đang tạo FAISS index từ {len(chunks)} chunks ...")
-    vectorstore = FAISS.from_texts(chunks, embeddings)
+    vectorstore = None
+    for start in range(0, len(chunks), batch_size):
+        batch = chunks[start:start + batch_size]
+        for attempt in range(1, max_retries + 1):
+            try:
+                if vectorstore is None:
+                    vectorstore = FAISS.from_texts(batch, embeddings)
+                else:
+                    vectorstore.add_texts(batch)
+                break
+            except Exception as e:
+                if not _is_rate_limit(e) or attempt == max_retries:
+                    raise
+                print(f"⏳ Bị rate limit khi embed chunks {start}-{start + len(batch)}, "
+                      f"chờ {wait_seconds}s rồi thử lại ({attempt}/{max_retries}) ...")
+                time.sleep(wait_seconds)
     print("✅ FAISS vectorstore đã sẵn sàng.")
     return vectorstore
