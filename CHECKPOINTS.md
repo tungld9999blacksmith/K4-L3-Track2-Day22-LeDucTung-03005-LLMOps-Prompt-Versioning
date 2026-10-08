@@ -35,7 +35,19 @@ pip install "langchain-community<0.4"   # bắt buộc: bản 0.4 làm import ra
 
 > Không cần tạo project thủ công: LangSmith tự tạo project tên `day22-lab` (giá trị `LANGCHAIN_PROJECT`) ở lần chạy đầu tiên có trace.
 >
-> Nếu tài khoản của bạn nằm ở khu vực EU (đăng nhập qua `eu.smith.langchain.com`), thêm dòng `LANGCHAIN_ENDPOINT=https://eu.api.smith.langchain.com` vào `.env`; mặc định (US) thì không cần.
+> **Chọn đúng `LANGCHAIN_ENDPOINT` theo khu vực tài khoản.** Tài khoản chỉ tồn tại ở khu vực bạn đăng ký, và key chỉ dùng được với API của khu vực đó. Đặt sai endpoint sẽ báo lỗi 401/403 và không có trace nào xuất hiện. Xem địa chỉ trên thanh trình duyệt khi đang đăng nhập LangSmith:
+>
+> | Địa chỉ web đăng nhập | `LANGCHAIN_ENDPOINT` |
+> |---|---|
+> | `smith.langchain.com` (US, mặc định) | `https://api.smith.langchain.com` |
+> | `eu.smith.langchain.com` (EU) | `https://eu.api.smith.langchain.com` |
+> | `apac.smith.langchain.com` (APAC) | `https://apac.api.smith.langchain.com` |
+>
+> Ví dụ với tài khoản APAC, trong `.env`:
+> ```env
+> LANGCHAIN_ENDPOINT=https://apac.api.smith.langchain.com
+> ```
+> `.env.example` mặc định là US; `src/config.py` đọc biến này từ `.env` nên chỉ cần sửa ở `.env`.
 
 **3. Cấu hình `.env`**
 
